@@ -31,23 +31,29 @@ def preprocess_input():
     return input_data
 
 # Streamlit UI
-st.set_page_config(page_title="📊 Customer Churn Prediction", page_icon=":guardsman:")
+st.set_page_config(page_title="📊 Customer Churn Prediction", page_icon=":guardsman:", layout="wide")
 st.title("📊 Customer Churn Prediction App")
 st.markdown("🔍 **Enter customer details to predict churn probability**")
 
-# Input fields (Ensure these match the training dataset)
-age = st.slider("🧑 Age", 18, 100, 30)
-tenure = st.slider("📆 Tenure (Months)", 0, 72, 12)
-monthly_charges = st.number_input("💰 Monthly Charges ($)", 0.0, 500.0, 50.0)
-total_charges = st.number_input("💳 Total Charges ($)", 0.0, 10000.0, 500.0)
+# Create two columns
+col1, col2 = st.columns(2)
 
-contract_one_year = st.selectbox("📜 One Year Contract", ["Yes", "No"])
-contract_two_year = st.selectbox("📜 Two Year Contract", ["Yes", "No"])
-credit_card_payment = st.selectbox("💳 Credit Card Payment", ["Yes", "No"])
-electronic_check_payment = st.selectbox("💳 Electronic Check Payment", ["Yes", "No"])
-mailed_check_payment = st.selectbox("💳 Mailed Check Payment", ["Yes", "No"])
-internet_service_fiber_optic = st.selectbox("🌐 Internet Service Fiber Optic", ["Yes", "No"])
-internet_service_no = st.selectbox("🌐 Internet Service No", ["Yes", "No"])
+with col1:
+    
+    age = st.slider("🧑 Age", 18, 100, 30)
+    tenure = st.slider("📆 Tenure (Months)", 0, 72, 12)
+    monthly_charges = st.number_input("💰 Monthly Charges ($)", 0.0, 500.0, 50.0)
+    total_charges = st.number_input("💳 Total Charges ($)", 0.0, 10000.0, 500.0)
+    contract_one_year = st.selectbox("📜 One Year Contract", ["Yes", "No"])
+
+with col2:
+    
+    contract_two_year = st.selectbox("📜 Two Year Contract", ["Yes", "No"])
+    credit_card_payment = st.selectbox("💳 Credit Card Payment", ["Yes", "No"])
+    electronic_check_payment = st.selectbox("💳 Electronic Check Payment", ["Yes", "No"])
+    mailed_check_payment = st.selectbox("💳 Mailed Check Payment", ["Yes", "No"])
+    internet_service_fiber_optic = st.selectbox("🌐 Internet Service Fiber Optic", ["Yes", "No"])
+    internet_service_no = st.selectbox("🌐 Internet Service No", ["Yes", "No"])
 
 # Prediction button
 if st.button("🔮 Predict Churn"):
